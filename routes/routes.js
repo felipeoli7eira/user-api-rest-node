@@ -18,4 +18,6 @@ route.post('/user', User.create)
 
 route.put('/user', User.update)
 
+route.delete('/user/:id', User.delete)
+
 module.exports = route

@@ -6,35 +6,27 @@ class User
     {
         let process = await UserModel.all()
 
-        res.statusCode = proccess.sttscode
+        res.statusCode = process.sttscode
 
-        res.json({process})
+        res.json( process )
     }
 
     async getByID(req, res)
     {
-        let proccess = await UserModel.findByID(req.params.id)
+        let process = await UserModel.findByID(req.params.id)
 
-        res.statusCode = proccess.sttscode
+        res.statusCode = process.sttscode
 
-        res.json(
-            {
-                proccess
-            }
-        )
+        res.json( process )
     }
 
     async create(req, res)
     {
-        const proccess = await UserModel.create(req.body)
+        const process = await UserModel.create(req.body)
 
-        res.statusCode = proccess.sttscode
+        res.statusCode = process.sttscode
 
-        res.json(
-            {
-                proccess
-            }
-        )
+        res.json( process )
     }
 
     async findUserByEmail()
@@ -44,15 +36,20 @@ class User
 
     async update(req, res)
     {
-        let proccess = await UserModel.update(req.body)
+        let process = await UserModel.update(req.body)
 
-        res.statusCode = proccess.sttscode
+        res.statusCode = process.sttscode
 
-        res.json(
-            {
-                proccess
-            }
-        )
+        res.json( process )
+    }
+
+    async delete(req, res)
+    {
+        let process = await UserModel.delete(req.params.id)
+
+        res.statusCode = process.sttscode
+        
+        res.json( process )
     }
 }
 

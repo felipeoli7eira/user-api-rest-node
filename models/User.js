@@ -144,6 +144,29 @@ class User
             return { sttscode: 500, data: null, error: true, message: error }
         }
     }
+
+    async delete(id)
+    {
+        if (id != undefined)
+        {
+            let user = await this.findByID(id)
+
+            if (user.data.length)
+            {
+                let stmt = await DBConn.delete().table('users').where( {id} )
+
+                return { sttscode: 200, data: stmt, error: false, message: 'deleted' }
+            }
+            else
+            {
+                return { sttscode: 400, data: null, error: true, message: 'Nenhum usuário encontrado para o ID informado' }
+            }
+        }
+        else
+        {
+            return { sttscode: 400, data: null, error: true, message: 'Não é possível deletar sem um ID para a consulta' }
+        }
+    }
 }
 
 module.exports = new User()
