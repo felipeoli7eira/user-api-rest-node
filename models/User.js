@@ -9,7 +9,7 @@ class User
         {
             let all = await DBConn.select( ['id', 'name', 'email', 'role'] ).table('users')
 
-            return { sttscode: 200, data: all, error: false, message: "executed" }
+            return { sttscode: 200, data: all, error: false, message: 'executed' }
         }
         catch (error)
         {
@@ -24,7 +24,7 @@ class User
         {
             let user = await DBConn.select( ['id', 'name', 'email', 'role'] ).table('users').where( { id } )
             
-            return { sttscode: 200, data: user, error: false, message: "executed" }
+            return { sttscode: 200, data: user, error: false, message: 'executed' }
         }
         catch (error)
         {
@@ -50,7 +50,7 @@ class User
                 {
                     if (check.data.length)
                     {
-                        return { sttscode: 400, data: null, error: true, message: "Já existe um usuário com o e-mail informado" }
+                        return { sttscode: 400, data: null, error: true, message: 'Já existe um usuário com o e-mail informado' }
                     }
 
                     const pwdHash = await bcrypt.hash(props.password, 10)
@@ -65,7 +65,7 @@ class User
                         }
                     ).table('users')
 
-                    return { sttscode: 201, data: row[ 0 ], error: false, message: "Usuário adicionado" }
+                    return { sttscode: 201, data: row[ 0 ], error: false, message: 'executed' }
                 }
                 else
                 {
@@ -95,7 +95,7 @@ class User
                 {
                     let update = await DBConn.update( { name: props.name, email: props.email, role: props.role} ).table('users').where({ id: props.id })
 
-                    return { sttscode: 200, data: update, error: false, message: 'updated' }
+                    return { sttscode: 200, data: update, error: false, message: 'executed' }
                 }
                 catch (error)
                 {
@@ -133,9 +133,9 @@ class User
     {
         try
         {
-            let result = await DBConn.select( ['id', 'name', 'email', 'role'] ).table('users').where({ email })
+            let result = await DBConn.select( ['id', 'name', 'email', 'password', 'role'] ).table('users').where({ email })
 
-            return { sttscode: 200, data: result, error: false, message: 'usuário encontrado' }
+            return { sttscode: 200, data: result, error: false, message: 'executed' }
         }
         catch (error)
         {
@@ -155,7 +155,7 @@ class User
             {
                 let stmt = await DBConn.delete().table('users').where( {id} )
 
-                return { sttscode: 200, data: stmt, error: false, message: 'deleted' }
+                return { sttscode: 200, data: stmt, error: false, message: 'executed' }
             }
             else
             {
