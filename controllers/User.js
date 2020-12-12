@@ -2,36 +2,57 @@ const UserModel = require('./../models/User')
 
 class User
 {
-    async store(req, res)
+    async index(req, res)
     {
-        const response = await UserModel.store(req.body)
+        let process = await UserModel.all()
 
-        if(response)
-        {
-            res.statuscode = 201
-            res.send(
-                {
-                    success: true,
-                    code: 201,
-                    data: null,
-                    message: 'created'
-                }
-            )
+        res.statusCode = proccess.sttscode
 
-            return true
-        }
+        res.json({process})
+    }
 
-        res.statuscode = 500
-        res.send(
+    async getByID(req, res)
+    {
+        let proccess = await UserModel.findByID(req.params.id)
+
+        res.statusCode = proccess.sttscode
+
+        res.json(
             {
-                success: false,
-                code: 500,
-                data: null,
-                message: 'serverError'
+                proccess
             }
         )
+    }
 
-        return false
+    async create(req, res)
+    {
+        const proccess = await UserModel.create(req.body)
+
+        res.statusCode = proccess.sttscode
+
+        res.json(
+            {
+                proccess
+            }
+        )
+    }
+
+    async findUserByEmail()
+    {
+
+    }
+
+    async update(req, res)
+    {
+        let proccess = await UserModel.update(req.body)
+
+        res.statusCode = proccess.sttscode
+
+        res.json(
+            {
+                proccess
+            }
+        )
     }
 }
 
